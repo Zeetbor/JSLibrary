@@ -1,0 +1,40 @@
+* {
+
+}
+
+body {
+  background-color: white;
+  display: grid;
+}
+
+.bookcase {
+  border: solid 50px;
+  border-color: #654321;
+  width: 750px;
+  height: 1000px;
+  display: grid;
+}
+
+.book {
+  font-size: 10px;
+
+}
+
+.new {
+  color: green;
+}
+
+.info {
+  color: black;
+}
+
+.card {
+  border: solid 5px;
+  border-color: black;
+}
+
+#form {
+  color: blue;
+  justify-content: center;
+  align-items: center;
+}
