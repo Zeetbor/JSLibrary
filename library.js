@@ -10,13 +10,14 @@ let myLibrary = [
     author: "Andrzej Sapkowski",
     pages: 434,
     read: "No",
-  }
+  },
 ];
 
 const bookcase = document.querySelector(".bookcase");
 var numberOfBooks = myLibrary.length;
 
-Book = (title, author, pages, read) => {
+//Book object constructor
+function Book(title, author, pages, read){
   this.title = title;
   this.author = author;
   this.pages = pages;
@@ -26,12 +27,14 @@ Book = (title, author, pages, read) => {
   }
 };
 
+
 addBookToLibrary = (title, author, pages, read) => {
   const addBook = new Book(title, author, pages, read); //create new book
   addBook.prototype = Object.create(Book.prototype); //set prototype
   myLibrary.push(addBook); //add to library
 }
 
+//Populate page with book cards
 render = () => {
   for (i = 0; i < numberOfBooks; i++) {
     createCard(i);
@@ -65,5 +68,9 @@ createCard = (index = numberOfBooks - 1) => {
   bookcase.appendChild(card);
 };
 
+//Add event listeners to buttons
 const new_button = document.querySelector(".new");
 new_button.addEventListener('click', render());
+
+const submit_button = document.querySelector("#submit");
+submit_button.addEventListener('click', addBookToLibrary());

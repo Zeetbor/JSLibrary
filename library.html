@@ -10,33 +10,42 @@
   <body>
     <button class="new">New Book</button>
 
-    <div>
+    <div id="form-container">
         <form id="form">
+          <div class="field">Please enter the book details</div>
+
           <div class = "field">
             <label id="title-label" for="title">Title: </label>
-            <input type="text" placeholder = "Enter Author of Book"> </input>
+            <input type="text" required maxlength = 100 placeholder = "Please enter the title of the book"> </input>
           </div>
 
           <div class = "field">
-            <label>Author: </label>
-            <input> </input>
+            <label id="author-label" for="author">Author: </label>
+            <input type="text" required maxlength = 50 placeholder = "Please enter the book's author"> </input>
           </div>
 
           <div class = "field">
-            <label>Pages: </label>
-            <input> </input>
+            <label id="pages-label" for="pages">Pages: </label>
+            <input type="number" required max=20000 min=1> </input>
           </div>
 
           <div class = "field">
             <label>Already Read?: </label>
-            <input> </input>
+            <select>
+              <option value = "Yes">Yes</option>
+              <option value = "No">No</option>
+            </select>
+          </div>
+
+          <div class ="field">
+            <button id="submit">Submit</button>
           </div>
 
         </form>
     </div>
 
     <div class="bookcase">
-      <div class="bookshelf"> </div>
+
     </div>
 
     <script src="library.js">

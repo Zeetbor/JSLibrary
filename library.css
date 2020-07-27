@@ -3,25 +3,25 @@
 }
 
 body {
-  background-color: white;
-  display: grid;
+  background-color: pink;
+}
+
+h2, h3{
+
 }
 
 .bookcase {
   border: solid 50px;
   border-color: #654321;
-  width: 750px;
+  width: 810px;
   height: 1000px;
-  display: grid;
-}
-
-.book {
-  font-size: 10px;
-
+  display: flex;
+  flex-direction: row;
+  background-color: linen;
 }
 
 .new {
-  color: green;
+  color: red;
 }
 
 .info {
@@ -29,12 +29,50 @@ body {
 }
 
 .card {
-  border: solid 5px;
+  border: solid 2px;
   border-color: black;
+  width: 200px;
+  height: 300px;
+  margin: 2px;
+  font-size: 15px;
+  text-align: center;
+  background-color: aquamarine;
+}
+
+#form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #form {
-  color: blue;
+  background-color: skyblue;
+  width: 300px;
+  height: 400px;
   justify-content: center;
   align-items: center;
+  padding: 10px;
+  margin: 10px;
+  border: solid 2px black;
+}
+
+.field {
+  margin: 10px;
+  background-color: lightgrey;
+}
+
+label {
+  margin: 10px;
+  background-color: violet;
+}
+
+input {
+  display: inline-grid;
+  margin: 10px;
+  background-color: Azure;
+}
+
+#submit {
+  justify-content: center;
+  margin-top: 20px;
 }
