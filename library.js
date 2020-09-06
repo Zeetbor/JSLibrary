@@ -27,7 +27,6 @@ function Book(title, author, pages, read){
   }
 };
 
-
 addBookToLibrary = (title, author, pages, read) => {
   const addBook = new Book(title, author, pages, read); //create new book
   addBook.prototype = Object.create(Book.prototype); //set prototype
@@ -41,9 +40,18 @@ render = () => {
   };
 };
 
+
 createCard = (index = numberOfBooks - 1) => {
+  var randomColor = "#" + Math.floor(Math.random()*16777215).toString(16);
   const card = document.createElement('div');
   card.setAttribute("class", "card")
+  card.style.backgroundColor = randomColor;
+
+  const remove = document.createElement("button");
+  remove.textContent = "X";
+  remove.setAttribute("class", "remove");
+  remove.setAttribute("id", "close");
+  card.appendChild(remove);
 
   const title = document.createElement("h2");
   title.textContent = myLibrary[index].title;
@@ -69,8 +77,17 @@ createCard = (index = numberOfBooks - 1) => {
 };
 
 //Add event listeners to buttons
+const showForm = document.getElementById("form-container");
+
 const new_button = document.querySelector(".new");
-new_button.addEventListener('click', render());
+new_button.addEventListener('click', (e) => {
+  showForm.style.display = "inline-block";
+});
+
+const closeForm = document.querySelector(".formBtn");
+closeForm.addEventListener('click',(e) => {
+  showForm.style.display = "none";
+})
 
 const submit_button = document.querySelector("#submit");
-submit_button.addEventListener('click', addBookToLibrary());
+submit_button.addEventListener('click', render());

@@ -8,11 +8,16 @@
   </head>
 
   <body>
-    <button class="new">New Book</button>
+    <div class="newbtndiv">
+    <button class="new">Add New Book</button>
+    </div>
 
     <div id="form-container">
         <form id="form">
-          <div class="field">Please enter the book details</div>
+          <div class="close-div">
+          <button class="formBtn" id="close">X</button>
+          </div>
+          <div class="field" id="CtA">Please enter the book details</div>
 
           <div class = "field">
             <label id="title-label" for="title">Title: </label>
@@ -38,7 +43,7 @@
           </div>
 
           <div class ="field">
-            <button id="submit">Submit</button>
+            <button id="submit">Add Book</button>
           </div>
 
         </form>
