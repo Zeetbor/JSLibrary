@@ -8,39 +8,47 @@
   </head>
 
   <body>
-    <button class="new">New Book</button>
+    <div class="titlediv">
+      <div>JavaScript Library</div>
+    </div>
 
-    <div id="form-container">
-        <form id="form">
-          <div class="field">Please enter the book details</div>
+    <div class="newbtndiv">
+      <button class="new">Add New Book</button>
+    </div>
+
+    <div class = "form-container">
+        <form class = "form">
+          <div class="close-div">
+            <button class="closeBtn" id="close">X</button>
+          </div>
+          <div class="field" id="CtA">Please enter the book details</div>
 
           <div class = "field">
             <label id="title-label" for="title">Title: </label>
-            <input type="text" required maxlength = 100 placeholder = "Please enter the title of the book"> </input>
+            <input id="title-input" type="text" name = "title" required maxlength = 100 placeholder = "Please enter the title of the book"> </input>
           </div>
 
           <div class = "field">
             <label id="author-label" for="author">Author: </label>
-            <input type="text" required maxlength = 50 placeholder = "Please enter the book's author"> </input>
+            <input id="author-input" type="text" name = "author" required maxlength = 50 placeholder = "Please enter the book's author"> </input>
           </div>
 
           <div class = "field">
             <label id="pages-label" for="pages">Pages: </label>
-            <input type="number" required max=20000 min=1> </input>
+            <input id="pages-input" type="number" name = "pages" required max=20000 min=1> </input>
           </div>
 
           <div class = "field">
-            <label>Already Read?: </label>
-            <select>
+            <label id="read-label" for="read">Already Read?: </label>
+            <select id="read-input" name = "read">
               <option value = "Yes">Yes</option>
               <option value = "No">No</option>
             </select>
           </div>
 
           <div class ="field">
-            <button id="submit">Submit</button>
+            <button id="submit" type="button">Add Book</button>
           </div>
-
         </form>
     </div>
 
