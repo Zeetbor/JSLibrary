@@ -14,8 +14,6 @@ let myLibrary = [
 ];
 
 const bookcase = document.querySelector(".bookcase");
-let numberOfBooks = myLibrary.length;
-let cardCount = 1;
 
 //Book object constructor
 function Book(title, author, pages, read) {
@@ -32,18 +30,17 @@ function addBookToLibrary(title, author, pages, read) {
   addBook = new Book(title, author, pages, read); //add to library
   myLibrary.push(addBook); //create new book
   addBook.prototype = Object.create(Book.prototype); //set prototype
-  createCard(numberOfBooks);
+  createCard(myLibrary.length);
   saveLocal();
 };
 
 //Populate page with book cards
-createCard = (index = numberOfBooks - 1) => {
+createCard = (index = myLibrary.length - 1) => {
   let randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
   const card = document.createElement('div');
 
   card.setAttribute("class", "card");
   card.setAttribute('data-index', index);
-  card.setAttribute('data-cardCount', cardCount);
   card.style.backgroundColor = randomColor;
 
   const remove = document.createElement("button");
@@ -53,6 +50,7 @@ createCard = (index = numberOfBooks - 1) => {
   remove.addEventListener("click", (e) => {
     myLibrary.splice(remove.parentElement.getAttribute("data-index"), 1);
     e.srcElement.parentElement.remove();
+    updateIndex();
     saveLocal();
   });
   card.appendChild(remove);
@@ -89,12 +87,19 @@ createCard = (index = numberOfBooks - 1) => {
     } else {
       readBtn.previousSibling.textContent = "Already Read?: Yes";
       myLibrary[index].read = "Yes";
-    }
+    } saveLocal();
   });
   bookcase.appendChild(card);
-  cardCount++;
 };
 
+function updateIndex(){
+  let newIndex = 0;
+  const cards = document.querySelectorAll(".card")
+    cards.forEach(function(card) {
+      card.setAttribute('data-index', newIndex)
+      newIndex++;
+    })
+  }
 
 //Add event listeners to buttons
 const showForm = document.querySelector(".form-container");
@@ -124,33 +129,20 @@ function resetForm(form){
 }
 
 render = () => {
-    for (i = 0; i < numberOfBooks; i++) {
+    for (i = 0; i < myLibrary.length; i++) {
       createCard(i);
     };
   };
-render();
+
 
 // Local Storage
-
 function saveLocal() {
   localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
 }
 
-// function restoreLocal() {
-//   myLibrary = JSON.parse(localStorage.getItem("myLibrary"));
-//   if (myLibrary === null) myLibrary = [];
-//   render();
-// }
-// restoreLocal()
-
-/*
-const card = document.querySelector(".card");
-const remove_button = document.querySelectorAll(".remove");
-for (let i = 0; i < remove_button.length; i++) {
-  remove_button[i].addEventListener("click", () => {
-    let bookIndex = card.getAttribute('data-index');
-    let bookNode = document.querySelector(`.card[data-index='${bookIndex}']`);
-    document.querySelector('.card').parentNode.removeChild(bookNode);
-    myLibrary.splice(myLibrary.indexOf(card), 1);
-  })};
-*/
+function restoreLocal() {
+  myLibrary = JSON.parse(localStorage.getItem("myLibrary"));
+  if (myLibrary === null || undefined) myLibrary = [];
+  render();
+}
+restoreLocal()
