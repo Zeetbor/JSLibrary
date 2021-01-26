@@ -1,4 +1,5 @@
-let myLibrary = [{
+let myLibrary = [
+  {
     title: "The Hobbit",
     author: "JRR Tolkien",
     pages: 295,
@@ -14,6 +15,7 @@ let myLibrary = [{
 
 const bookcase = document.querySelector(".bookcase");
 let numberOfBooks = myLibrary.length;
+let cardCount = 1;
 
 //Book object constructor
 function Book(title, author, pages, read) {
@@ -30,15 +32,18 @@ function addBookToLibrary(title, author, pages, read) {
   addBook = new Book(title, author, pages, read); //add to library
   myLibrary.push(addBook); //create new book
   addBook.prototype = Object.create(Book.prototype); //set prototype
-  createCard(myLibrary.length - 1);
+  createCard(numberOfBooks);
+  saveLocal();
 };
 
 //Populate page with book cards
 createCard = (index = numberOfBooks - 1) => {
   let randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
   const card = document.createElement('div');
-  card.setAttribute("class", "card")
+
+  card.setAttribute("class", "card");
   card.setAttribute('data-index', index);
+  card.setAttribute('data-cardCount', cardCount);
   card.style.backgroundColor = randomColor;
 
   const remove = document.createElement("button");
@@ -48,6 +53,7 @@ createCard = (index = numberOfBooks - 1) => {
   remove.addEventListener("click", (e) => {
     myLibrary.splice(remove.parentElement.getAttribute("data-index"), 1);
     e.srcElement.parentElement.remove();
+    saveLocal();
   });
   card.appendChild(remove);
 
@@ -73,21 +79,21 @@ createCard = (index = numberOfBooks - 1) => {
 
   const readBtn = document.createElement("button");
   readBtn.textContent = "Change read status"
-  readBtn.setAttribute("class", "changBtn");
+  readBtn.setAttribute("class", "readBtn");
   card.appendChild(readBtn);
   readBtn.addEventListener("click", () => {
-    if (myLibrary[index].read === "Yes") {
+    let status = myLibrary[index].read;
+    if(status == "Yes") {
+      readBtn.previousSibling.textContent = "Already Read?: No";
       myLibrary[index].read = "No";
-      readBtn.parentElement.children[4].textContent = "Already Read: No"
     } else {
+      readBtn.previousSibling.textContent = "Already Read?: Yes";
       myLibrary[index].read = "Yes";
-      readBtn.parentElement.children[4].textContent = "Already Read: Yes"
     }
   });
   bookcase.appendChild(card);
+  cardCount++;
 };
-
-
 
 
 //Add event listeners to buttons
@@ -124,6 +130,18 @@ render = () => {
   };
 render();
 
+// Local Storage
+
+function saveLocal() {
+  localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+}
+
+// function restoreLocal() {
+//   myLibrary = JSON.parse(localStorage.getItem("myLibrary"));
+//   if (myLibrary === null) myLibrary = [];
+//   render();
+// }
+// restoreLocal()
 
 /*
 const card = document.querySelector(".card");
